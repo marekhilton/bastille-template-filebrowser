@@ -1,0 +1,26 @@
+#!/bin/sh
+
+. /etc/rc.subr
+
+name=filebrowser
+rcvar=filebrowser_enable
+
+
+pidfile="/var/run/${name}.pid"
+
+start_cmd="filebrowser_start"
+procname="/usr/local/bin/filebrowser"
+
+
+filebrowser_start() {
+  daemon -p $pidfile /usr/local/bin/filebrowser ${filebrowser_flags}
+}
+
+
+load_rc_config filebrowser
+: ${filebrowser_enable:=no}
+: ${filebrowser_flags:=-c /usr/local/etc/filebrowser/settings.json}
+
+load_rc_config $name
+run_rc_command "$1"
+

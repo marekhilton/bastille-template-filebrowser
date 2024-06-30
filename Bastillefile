@@ -1,0 +1,11 @@
+# Install filebrowser
+CP usr /
+CMD mkdir -p /usr/local/bin
+PKG curl
+CMD curl -sL https://github.com/filebrowser/filebrowser/releases/download/v2.30.0/freebsd-amd64-filebrowser.tar.gz | tar -xz -C /usr/local/bin filebrowser 
+
+# Configure
+CMD mkdir -p /srv
+SYSRC filebrowser_enable=yes
+SERVICE filebrowser start
+
